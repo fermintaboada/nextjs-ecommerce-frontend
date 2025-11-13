@@ -1,0 +1,56 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+
+:root {
+  --c-bg-start: #08203e;
+  --c-bg-end:   #557c93;
+
+
+  --c-text:        #E6F0F7;
+  --c-text-muted:  #9FB0BF;
+
+  --c-primary:            #00A8E1;  
+  --c-primary-contrast:   #041016;  
+
+  
+  --c-hover:   #123d52;                 
+  --c-surface: rgba(255,255,255,0.06);  
+  --c-border:  rgba(255,255,255,0.14);
+}
+
+
+@theme inline {
+  --color-background: transparent;                 
+  --color-foreground: var(--c-text);
+  --color-primary: var(--c-primary);
+  --color-primary-foreground: var(--c-primary-contrast);
+  --color-secondary: var(--c-hover);
+  --color-secondary-foreground: var(--c-text);
+  --color-muted-foreground: var(--c-text-muted);
+  --color-border: var(--c-border);
+  --color-input: var(--c-border);
+  --color-ring: var(--c-primary);
+  --color-card: color-mix(in oklab, black 60%, transparent);
+  --color-card-foreground: var(--c-text);
+
+  --font-sans: var(--font-roboto);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+@layer base {
+  html, body {
+    background-image: linear-gradient(135deg, var(--c-bg-start), var(--c-bg-end));
+    color: var(--c-text);
+  }
+  * {
+    @apply border-border;
+  }
+  body {
+    font-family: var(--font-roboto), system-ui, -apple-system, Segoe UI, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  }
+  h1,h2,h3,h4,h5,h6, a, nav a, .link {
+    font-family: var(--font-roboto-condensed), var(--font-roboto), system-ui, -apple-system, Segoe UI, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    letter-spacing: 0.01em;
+  }
+}
