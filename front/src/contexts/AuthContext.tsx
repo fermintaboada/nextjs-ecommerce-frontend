@@ -1,5 +1,4 @@
 "use client";
-
 import { createContext, useContext, useEffect, useState } from "react";
 import { userSessionInterface } from "../interfaces/IUserSession";
 
@@ -7,12 +6,14 @@ interface AuthContextProps {
     dataUser: userSessionInterface | null;
     setDataUser: (dataUser: userSessionInterface | null) => void;
     logout: () => void;
+    loading: boolean; 
 };
 
 const AuthContext = createContext<AuthContextProps>({
     dataUser: null,
     setDataUser: () => {},
     logout: () => {},
+    loading: true, 
 });
 
 interface AuthProviderProps {
@@ -21,33 +22,33 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [dataUser, setDataUser] = useState<userSessionInterface | null>(null);
+    const [loading, setLoading] = useState(true); 
 
     useEffect(() => {
-       // se ejecutara cuando dataUser cambie, y tomara esa info y la almacenara en el localstorage 
         if (dataUser) {
             localStorage.setItem('userSession', JSON.stringify(dataUser));
         }
     }, [dataUser]);
 
     useEffect(() => {
-        // este useEffect se encargara de extraer la info del localstorage y almacenarla en el state 
         if (typeof window !== 'undefined' && window.localStorage){
             const UserInfo = localStorage.getItem('userSession');
             if(UserInfo){
                 setDataUser(JSON.parse(UserInfo));
             }
+            setLoading(false);
         }
     }, [])
 
     const logout = () => {
         setDataUser(null);
         if (typeof window !== 'undefined' && window.localStorage) {
-        localStorage.removeItem('userSession');
+            localStorage.removeItem('userSession');
         }
     };
 
     return (
-        <AuthContext.Provider value={{ dataUser, setDataUser, logout }}>
+        <AuthContext.Provider value={{ dataUser, setDataUser, logout, loading }}>
             {children}
         </AuthContext.Provider>
     )

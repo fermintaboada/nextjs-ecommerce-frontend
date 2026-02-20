@@ -1,42 +1,62 @@
-"use client"; 
+"use client";
 
-import { useCart } from '@/contexts/CardContex';
-import { Product } from '@/interfaces/IProduct';
-import React from 'react'
+import { useCart } from "@/contexts/CartContex";
+import { UseAuth } from "@/contexts/AuthContext";
+import { Product } from "@/interfaces/IProduct";
+import React, { useState } from "react";
 
 interface ButtonProps {
-    product: Product;
+  product: Product;
 }
 
-const ButtonAddCart = ({ product }: ButtonProps) =>{
- const { addToCart} = useCart();
+const ButtonAddCart = ({ product }: ButtonProps) => {
+  const { dataUser } = UseAuth();
+  const { addToCart, cartItems } = useCart();
+  const [showFeedback, setShowFeedback] = useState(false);
 
-return (
-    <div className='mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8 '>
-        <button onClick={()=>addToCart(product)}
-        className="cursor-pointer text-white mt-4 sm:mt-0 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-        > 
-        <svg
-            className='w-5 h-5 -ms-2 me-2'
-            aria-hidden='true'
-            xmlns='http://www.w3.org/2000/svg'
-            width="24"
-            height="24"
-            fill='none'
-            viewBox='0 0 24 24'
-        >
-            <path
-            stroke='currentColor'
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            stroke-width="2"
-            d= "m4 4h1.5l8 16m0 0h8m 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm-12 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"
-        />
+  const handleAdd = () => {
+    if (!dataUser) {
+      alert("Debes estar logueado para agregar un producto al carrito");
+      return;
+    }
+
+    const exists = cartItems.some((item) => item.id === product.id);
+    if (exists) {
+      alert("Solo puedes agregar una unidad por producto");
+      return;
+    }
+
+    addToCart(product);
+    setShowFeedback(true);
+    setTimeout(() => setShowFeedback(false), 2000);
+  };
+
+  return (
+    <div className="relative w-full mt-4">
+      {showFeedback && (
+        <div className="absolute -top-10 left-0 right-0 text-center animate-bounce">
+          <span className="bg-green-600 text-white text-xs px-3 py-1 rounded-full shadow-lg">
+            ¡Agregado! ✅
+          </span>
+        </div>
+      )}
+
+      <button
+        onClick={handleAdd}
+        className="flex items-center justify-center w-full text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 transition-all active:scale-95"
+      >
+        <svg className="w-5 h-5 me-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+          />
         </svg>
         Agregar al carrito
-        </button>
+      </button>
     </div>
-);
+  );
 };
 
-export default ButtonAddCart
+export default ButtonAddCart;

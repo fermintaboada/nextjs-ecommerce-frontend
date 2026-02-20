@@ -12,14 +12,14 @@ export const NavItems = [
         route: PATHROUTES.PRODUCTS,
     },
     {
+        id: 4,
+        nameToRender: "Dashboard",
+        route: PATHROUTES.DASHBOARD,
+    },
+    {
         id: 3,
         nameToRender: "Cart",
         route: PATHROUTES.CART,
     },
-    {
-        id: 4,
-        nameToRender: "Dashboard",
-        route: PATHROUTES.DASHBOARD,
-    }
 
 ]
