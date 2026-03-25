@@ -32,6 +32,7 @@ const DashboardPage = () => {
     fetchOrders();
 }, [dataUser]);
 
+
 const money = useMemo(() => {
   return new Intl.NumberFormat("es-AR", {
     style: "currency",
@@ -122,7 +123,6 @@ if (loading || !dataUser) {
                       </p>
                     </div>
 
-                    {/* estado mock */}
                     <span className="px-3 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800">
                       Envío: En camino
                     </span>
@@ -139,7 +139,7 @@ if (loading || !dataUser) {
                         >
                           <span className="text-sm text-gray-800">{p.name}</span>
                           <span className="text-sm font-semibold text-gray-900 whitespace-nowrap">
-                            {/* money.format */(p.price)}
+                            {(p.price)}
                           </span>
                         </li>
                       ))}

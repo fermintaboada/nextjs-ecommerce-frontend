@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 E-commerce Frontend Application
 
-## Getting Started
+> ⚠️ This project focuses on frontend development. The backend is consumed via external APIs.
 
-First, run the development server:
+A production-oriented e-commerce frontend built with Next.js and TypeScript, focused on scalable architecture, state management, and real-world user flows such as authentication and cart handling.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- User authentication with persistent sessions and protected routes  
+- Global state management using React Context API and custom hooks  
+- Shopping cart system with business logic (item validation, totals, persistence)  
+- Dynamic product pages using Next.js App Router  
+- Form handling with schema-based validation (Formik + Yup)  
+- Reusable and modular UI components  
+- Responsive design with Tailwind CSS  
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🧠 Architecture
 
-To learn more about Next.js, take a look at the following resources:
+The application is structured with a strong focus on scalability and maintainability:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Context-based state management** for authentication and cart logic  
+- **Service layer abstraction** for API communication  
+- **Reusable components** for consistent UI behavior  
+- **Validation layer** using centralized schemas  
+- **Separation of concerns** between UI, state, and data logic  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🛠️ Tech Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Next.js (App Router)  
+- React  
+- TypeScript  
+- Tailwind CSS  
+- Formik  
+- Yup  
+- Context API  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🔌 API Integration
+
+The frontend communicates with a backend through a dedicated service layer, handling:
+
+- Authentication (login / register)  
+- Product data fetching  
+- Order management  
+
+Token-based requests are used for protected operations.
+
+---
+
+## 📂 Project Structure
+
+src/
+├── app/ # Routing (Next.js App Router)
+├── components/ # Reusable UI components
+├── contexts/ # Global state (Auth, Cart)
+├── services/ # API communication
+├── validators/ # Form validation schemas

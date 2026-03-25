@@ -7,7 +7,6 @@ import { NavbarUserPill } from './NavbarUserPill'
 export default function NavBar() {
   const [open, setOpen] = useState(false)
 
-  // Solo queda esta lógica para el icono del carrito
   const isCart = (name: string) => name.toLowerCase() === 'cart' || name.toLowerCase() === 'carrito'
 
   return (

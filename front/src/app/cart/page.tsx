@@ -15,6 +15,7 @@ const CartPage = () => {
 
   const total = getTotal();
   const itemCount = getItemsCount();
+  
 
   const handleCheckout = async () => {
     if(!dataUser?.token){
